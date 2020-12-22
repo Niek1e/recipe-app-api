@@ -239,6 +239,8 @@ class RecipeImageUploadTests(TestCase):
         url = image_upload_url(self.recipe.id)
         res = self.client.post(url, {'image': 'notimage'}, format='multipart')
 
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_filter_recipes_by_tags(self):
         """Test returning recipes with specific tags"""
         recipe1 = sample_recipe(user=self.user, title='Thai vegetable curry')
